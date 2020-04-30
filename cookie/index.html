@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>cookie test</h1>
+
+    <h2>login</h2>
+    <input id="account" type="text" placeholder="账号"/>
+    <input id="password" type="text" placeholder="密码"/>
+    <button onclick="tologin()">登录</button>
+
+    <script src="./src/indedx.js"></script>
+    <script>
+        var cds = cookies.data();
+        console.log(cds)
+
+        function tologin() {
+            let account = $('#account').value;
+            let password = $('#password').value;
+            if (account && password) {
+                cookies.set('account', account);
+                cookies.set('password', password);
+            }
+        }
+
+        function $(selector) {
+            return document.querySelector(selector);
+        }
+    </script>
+</body>
+</html>
