@@ -22,8 +22,10 @@
             let account = $('#account').value;
             let password = $('#password').value;
             if (account && password) {
-                cookies.set('account', account);
-                cookies.set('password', password);
+                cookies.set('account', account, 7);
+                cookies.set('password', password, {
+                    d: 7git
+                });
             }
         }
 
