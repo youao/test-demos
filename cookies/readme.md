@@ -2,6 +2,8 @@
 
 封装了Document.cookie，这边的处理是直接挂载到window对象上。
 
+
+
 ## 文档
 
 ### Cookies.get(key)
@@ -15,6 +17,7 @@
 |  返回值 |
 |  ----  |
 | 获取成功返回对应值，失败返回false  |
+
 
 ### Cookies.set(key, value, [op])
 
@@ -32,6 +35,7 @@
 | op.i  | 否 | 无 | 设置cookie期限，分 |
 | op.s  | 否 | 无 | 设置cookie期限，秒 |
 
+
 ### Cookies.del(key)
 
 删除指定cookie
@@ -40,9 +44,12 @@
 |  ----  | ----  | ----  | ----  |
 | key  | 是 | 无 |  |
 
+
 ### Cookies.data()
 
 获取cookie对象（全部）
+
+
 
 ## 参考资料
 
