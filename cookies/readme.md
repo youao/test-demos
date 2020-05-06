@@ -18,7 +18,7 @@
 |  :----  |
 | 获取成功返回对应值，失败返回false  |
 
-``` javascipt
+```javascript
 let account = Cookies.get('account');
 console.log(account); // "adada"
 ```
@@ -40,7 +40,7 @@ console.log(account); // "adada"
 | op.i  | 否 | 无 | 设置cookie期限，分 |
 | op.s  | 否 | 无 | 设置cookie期限，秒 |
 
-```javascipt
+```javascript
 Cookies.set('account', 'adada');
 
 // 设置期限
@@ -64,7 +64,7 @@ Cookies.set('account', 'adada', {
 | key  | 是 | 无 |  |
 
 
-```javascipt
+```javascript
 Cookies.del('account');
 ```
 
@@ -72,7 +72,7 @@ Cookies.del('account');
 
 获取cookie对象（全部）
 
-```javascipt
+```javascript
 let datas = Cookies.data();
 console.log(datas); 
 // {account: "adada", password: "123456"}
