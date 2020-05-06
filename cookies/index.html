@@ -13,18 +13,16 @@
     <input id="password" type="text" placeholder="密码"/>
     <button onclick="tologin()">登录</button>
 
-    <script src="./src/indedx.js"></script>
+    <script src="./src/index.js"></script>
     <script>
-        var cds = cookies.data();
-        console.log(cds)
 
         function tologin() {
             let account = $('#account').value;
             let password = $('#password').value;
             if (account && password) {
-                cookies.set('account', account, 7);
-                cookies.set('password', password, {
-                    d: 7git
+                Cookies.set('account', account, 7);
+                Cookies.set('password', password, {
+                    d: 7
                 });
             }
         }
@@ -32,6 +30,22 @@
         function $(selector) {
             return document.querySelector(selector);
         }
+
+        function start() {
+            let account = Cookies.get('account');
+            if (account) {
+                $('#account').value = account;
+            }
+            let password = Cookies.get('password');
+            if (password) {
+                $('#password').value = password;
+            }
+
+            var cds = Cookies.data();
+            console.log(cds)
+        }
+
+        window.onload = start;
     </script>
 </body>
 </html>

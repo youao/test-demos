@@ -81,6 +81,6 @@
     c.del = function (key) {
         c.set(key, '', 'Thu, 01 Jan 1970 00:00:00 GMT');
     }
-    window.cookies = c;
+    window.Cookies = c;
 })(window)
 
