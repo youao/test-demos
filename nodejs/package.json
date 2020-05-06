@@ -1,0 +1,11 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "nodejs test demos",
+  "main": "index.js",
+  "scripts": {
+    "run": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
