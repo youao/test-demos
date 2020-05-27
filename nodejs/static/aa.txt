@@ -1,2 +1,0 @@
-hello node.js
-hello word

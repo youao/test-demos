@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UA Admin</title>
+    <style>
+        :root {
+            font-size: 14px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        .clear::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .pagebox {
+            width: 1200px;
+            margin: auto;
+        }
+
+        .asidebox {
+            float: left;
+            width: 200px;
+        }
+
+        .contentbox {
+            float: left;
+            width: 1000px;
+        }
+
+        span.article-list-span {
+            float: left;
+            height: 40px;
+            line-height: 40px;
+            overflow: hidden;
+        }
+
+        span.article-list-span.time {
+            width: 150px;
+        }
+
+        span.article-list-span.title {
+            width: 600px;
+        }
+
+        span.article-list-span.do {
+            width: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="clear pagebox">
+        <div class="logo asidebox">UA Admin</div>
+        <nav class="contentbox">
+            <ul>
+                <li>文章管理</li>
+            </ul>
+        </nav>
+    </header>
+    <section class="content pagebox">
+        <nav class="asidebox">
+            <ul>
+                <li>文章列表</li>
+                <li>添加文章</li>
+            </ul>
+        </nav>
+        <section class="main contentbox">
+            <ul>
+                <li class="head clear">
+                    <span class="article-list-span time">时间</span>
+                    <span class="article-list-span title">标题</span>
+                    <span class="article-list-span do">操作</span>
+                </li>
+                <li class="clear">
+                    <span class="article-list-span time">2020/05/26 17:27</span>
+                    <span class="article-list-span title">标题</span>
+                    <span class="article-list-span do">
+                        <button>编辑</button>
+                        <button>删除</button>
+                    </span>
+                </li>
+            </ul>
+        </section>
+    </section>
+</body>
+
+</html>
