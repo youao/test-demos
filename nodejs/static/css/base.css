@@ -2,3 +2,37 @@
     margin: 0;
     padding: 0;
 }
+:root {
+    font-size: 14px;
+}
+.pagebox {
+    width: 750px;
+    margin: 0 auto;
+}
+.pagebox.admin {
+    width: 1200px;
+}
+
+ul, ol, li {
+    list-style: none;
+}
+.clear::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.asidebox {
+    float: left;
+    width: 200px;
+}
+
+.contentbox {
+    float: left;
+    width: 1000px;
+}

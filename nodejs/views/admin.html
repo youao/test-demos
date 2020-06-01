@@ -5,42 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UA Admin</title>
+    <link rel="stylesheet" href="/static/css/base.css">
     <style>
-        :root {
-            font-size: 14px;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        ul,
-        li {
-            list-style: none;
-        }
-
-        .clear::after {
-            content: '';
-            display: block;
-            clear: both;
-        }
-
-        .pagebox {
-            width: 1200px;
-            margin: auto;
-        }
-
-        .asidebox {
-            float: left;
-            width: 200px;
-        }
-
-        .contentbox {
-            float: left;
-            width: 1000px;
-        }
-
         span.article-list-span {
             float: left;
             height: 40px;
@@ -63,7 +29,7 @@
 </head>
 
 <body>
-    <header class="clear pagebox">
+    <header class="clear pagebox admin">
         <div class="logo asidebox">UA Admin</div>
         <nav class="contentbox">
             <ul>
@@ -71,7 +37,7 @@
             </ul>
         </nav>
     </header>
-    <section class="content pagebox">
+    <section class="content pagebox admin">
         <nav class="asidebox">
             <ul>
                 <li>文章列表</li>
@@ -91,7 +57,7 @@
                     <span class="article-list-span title">{{d.title}}</span>
                     <span class="article-list-span do">
                         <button>编辑</button>
-                        <button>删除</button>
+                        <button onclick="delAticle(`{{d.id}}`)">删除</button>
                     </span>
                 </li>
                 {% else %}
@@ -102,5 +68,34 @@
     </section>
 
 </body>
+
+<script>
+    function delAticle(id) {
+        let msg = '确认删除？';
+        let isConfirm = confirm(msg);
+        if (isConfirm) {
+            url = './newsDel?id=' + id;
+            get(url, (res) => {
+                console.log(res);
+                alert(res.msg);
+                if (res.status == 1) {
+                    location.reload();
+                }
+            })
+        }
+    }
+
+    function get(url, callback, dataTpye = 'json') {
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                res = dataTpye == 'json' ? JSON.parse(xhr.responseText) : xhr.responseText;
+                typeof callback == 'function' && callback(res);
+            }
+        }
+        xhr.open('GET', url, true);
+        xhr.send();
+    }
+</script>
 
 </html>
