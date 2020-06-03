@@ -2,7 +2,7 @@ const Koa = require('koa');
 const sever = require('koa-static');
 const body = require('koa-body')
 const router = require('koa-router')();
-const { createEnv } = require('./static/js/nunjucksEnv');
+const views = require('koa-views');
 const { initDB, con } = require('./static/js/db');
 
 initDB();
@@ -12,17 +12,13 @@ const app = new Koa();
 app.use(body());
 app.use(sever('.'));
 
-const env = createEnv('views', {
-    watch: true,
-    filters: {
-        hex: function (n) {
-            return '0x' + n.toString(16);
-        }
-    }
-});
+app.use(views(__dirname + '/views', {
+    map: { html: 'nunjucks' }
+
+}));
 
 router.get('/', async (ctx, next) => {
-    ctx.response.body = env.render('index.html');
+    await ctx.render('index.html');
 });
 
 router.get(['/admin', '/admin/news'], async (ctx, next) => {
@@ -33,7 +29,7 @@ router.get(['/admin', '/admin/news'], async (ctx, next) => {
     data.forEach(it => {
         it.create_time = new Date(+it.create_time).toLocaleString();;
     })
-    ctx.response.body = env.render('admin.html', { data });
+    await ctx.render('admin.html', { data });
 });
 
 router.get('/admin/newsView', async (ctx, next) => {
@@ -43,13 +39,13 @@ router.get('/admin/newsView', async (ctx, next) => {
     }
     const sql = 'SELECT * FROM `news` where `id`=?';
     const [res] = await con().execute(sql, [id]);
-    ctx.response.body = env.render('addnews.html', {
+    await ctx.render('addnews.html', {
         data: res[0]
     });
 });
 
 router.get('/admin/newsAdd', async (ctx, next) => {
-    ctx.response.body = env.render('addnews.html');
+    await ctx.render('addnews.html');
 });
 
 router.post('/admin/newsAddSub', async (ctx, next) => {
