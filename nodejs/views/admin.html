@@ -40,8 +40,8 @@
     <section class="content pagebox admin">
         <nav class="asidebox">
             <ul>
-                <li>文章列表</li>
-                <li>添加文章</li>
+                <li><a href="/admin/news">文章列表</a></li>
+                <li><a href="/admin/newsAdd">添加文章</a></li>
             </ul>
         </nav>
         <section class="main contentbox">
@@ -53,10 +53,10 @@
                 </li>
                 {% for d in data %}
                 <li class="clear">
-                    <span class="article-list-span time">{{d.newTime}}</span>
+                    <span class="article-list-span time">{{d.create_time}}</span>
                     <span class="article-list-span title">{{d.title}}</span>
                     <span class="article-list-span do">
-                        <button>编辑</button>
+                        <a href="/admin/newsView?id={{d.id}}"><button>编辑</button></a>
                         <button onclick="delAticle(`{{d.id}}`)">删除</button>
                     </span>
                 </li>
@@ -69,14 +69,14 @@
 
 </body>
 
+<script src="/static/js/base.js"></script>
 <script>
     function delAticle(id) {
         let msg = '确认删除？';
         let isConfirm = confirm(msg);
         if (isConfirm) {
-            url = './newsDel?id=' + id;
-            get(url, (res) => {
-                console.log(res);
+            url = '/admin/newsDel?id=' + id;
+            Xhr.get(url, (res) => {
                 alert(res.msg);
                 if (res.status == 1) {
                     location.reload();
@@ -84,18 +84,7 @@
             })
         }
     }
-
-    function get(url, callback, dataTpye = 'json') {
-        let xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                res = dataTpye == 'json' ? JSON.parse(xhr.responseText) : xhr.responseText;
-                typeof callback == 'function' && callback(res);
-            }
-        }
-        xhr.open('GET', url, true);
-        xhr.send();
-    }
+    
 </script>
 
 </html>

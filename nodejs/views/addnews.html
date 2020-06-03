@@ -7,6 +7,28 @@
     <title>UA Admin</title>
     <link rel="stylesheet" href="/static/css/base.css">
     <style>
+        #editor-box {
+            height: 300px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            overflow: scroll;
+        }
+
+        #content {
+            outline: none;
+        }
+
+        input#title {
+            display: block;
+            width: 100%;
+            border: 0;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 2.2;
+            border-bottom: 1px solid #ccc;
+            outline: none;
+        }
     </style>
 </head>
 
@@ -22,18 +44,86 @@
     <section class="content pagebox admin">
         <nav class="asidebox">
             <ul>
-                <li>文章列表</li>
-                <li>添加文章</li>
+                <li><a href="/admin/news">文章列表</a></li>
+                <li><a href="/admin/newsAdd">添加文章</a></li>
             </ul>
         </nav>
         <section class="main contentbox">
-            
+            <input type="text" id="title" value="{{data.title}}" placeholder="标题" />
+            <div id="editor-box">
+                <div id="content" contenteditable="true">{{data.content}}</div>
+            </div>
+            <button onclick="sub()">提交</button>
+
         </section>
     </section>
 
 </body>
 
+<script src="/static/js/base.js"></script>
 <script>
+    let id = `{{data.id}}`;
+    
+    content.addEventListener("keydown", function (e) {
+        console.log(e.keyCode);        
+        if (e.keyCode=='66' && e.ctrlKey && e.altKey) {
+            execCommand('bold'); // b 加粗
+        }
+        if (e.keyCode=='73' && e.ctrlKey && e.altKey) {
+            execCommand('italic'); // i 斜体
+        }
+        if (e.keyCode=='69' && e.ctrlKey && e.altKey) {
+            execCommand('justifyCenter'); // e 居中
+        }
+        if (e.keyCode=='49' && e.ctrlKey && e.altKey) {
+            execCommand('formatBlock', 'h1');
+        }
+        if (e.keyCode=='50' && e.ctrlKey && e.altKey) {
+            execCommand('formatBlock', 'h2');
+        }
+        if (e.keyCode=='51' && e.ctrlKey && e.altKey) {
+            execCommand('formatBlock', 'h3');
+        }
+    });
+
+    function execCommand(name, args = null) {
+        document.execCommand(name, false, args);
+    }
+
+    function sub() {       
+        let o = {
+            title: title.value,
+            content: content.innerHTML,
+        };
+        if (!o.title || !o.content) {
+            alert('资料不完整');
+            return false;
+        }
+        if (id) {
+            updataNews(o);
+        } else {
+            addNews(o);
+        }
+    }
+    function updataNews(o) {
+        o.id = id;
+        Xhr.post('/admin/newsUpdateSub', o, (res) => {
+            console.log(res);
+            alert(res.msg);
+            if (res.status) {
+                location.href = '/admin/news';
+            }
+        })
+    }
+    function addNews(o) {
+        Xhr.post('/admin/newsAddSub', o, (res) => {
+            console.log(res);
+            alert(res.msg);
+            if (res.status) {
+                location.href = '/admin/news';
+            }
+        })
+    }
 </script>
 
 </html>
