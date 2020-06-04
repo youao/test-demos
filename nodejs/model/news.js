@@ -16,7 +16,7 @@ module.exports = {
         const sql = 'SELECT * FROM `news` LIMIT ?,?';
         let [rows] = await con().execute(sql, [(page - 1) * pagesize, pagesize]);   
         rows.forEach(it => {
-            it.create_time = timeToStr(it.create_time);
+            it.update_time = timeToStr(it.update_time);
         });
         return rows;
     },

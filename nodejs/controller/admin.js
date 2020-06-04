@@ -3,11 +3,14 @@ const { newsModel } = require('../model');
 module.exports = {
 
     async news(ctx) {
-        const { page = 1,  pageSize = 5} = ctx.query;
+        const { page = 1, pageSize = 5 } = ctx.query;
         const data = await newsModel.findByPage(page, pageSize);
-        await ctx.render('admin.html', { data });
+        const dataAll = await newsModel.findAll(page, pageSize);
+        const total = dataAll.length;
+        const totalPage = Math.ceil(total / pageSize);
+        await ctx.render('admin.html', { data, totalPage });
     },
-    
+
     async newsView(ctx) {
         const { id } = ctx.query;
         if (!id) {
@@ -53,4 +56,4 @@ module.exports = {
         });
     }
 
-  };
+};
