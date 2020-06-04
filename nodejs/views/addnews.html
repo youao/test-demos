@@ -5,20 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UA Admin</title>
-    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/css/base.css">
     <style>
-        #editor-box {
-            height: 300px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            margin-top: 10px;
-            overflow: scroll;
-        }
-
-        #content {
-            outline: none;
-        }
-
         input#title {
             display: block;
             width: 100%;
@@ -27,6 +15,17 @@
             font-weight: bold;
             line-height: 2.2;
             border-bottom: 1px solid #ccc;
+            outline: none;
+        }
+        #editor-box {
+            height: 300px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            overflow: scroll;
+        }
+        #content {
+            min-height: 100%;
             outline: none;
         }
     </style>
@@ -60,7 +59,7 @@
 
 </body>
 
-<script src="/static/js/base.js"></script>
+<script src="/js/base.js"></script>
 <script>
     let id = `{{data.id}}`;
     
