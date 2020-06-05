@@ -7,20 +7,20 @@
     <title>UA</title>
     <link rel="stylesheet" href="/css/base.css">
     <style>
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
+        .rowtime {
+            color: #999;
         }
     </style>
 </head>
 
 <body>
-    <header class="pagebox">
-        <div class="logo">UA Articl List</div>
+    <header class="pageheader">
+        <div class="pagebox">
+            <div class="logo">{{data.title}}</div>
+            <p class="rowtime">{{data.time}}</p>
+        </div>
     </header>
-    <section class="content page-box">
-
-    </section>
+    <section class="content pagebox">{{data.content}}</section>
 </body>
 
 </html>

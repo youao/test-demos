@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UA</title>
+    <link rel="stylesheet" href="/css/base.css">
+    <style>
+        .list li {
+            padding: 20px 0;
+        }
+
+        .list p {
+            color: #999;
+        }
+
+        .pagebtn {
+            margin-right: 10px;
+            padding: 0 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="pageheader">
+        <div class="pagebox">
+            <div class="logo">UA Articl List</div>
+        </div>
+    </header>
+    <section class="content pagebox">
+        <ul class="list">
+            {% for d in data %}
+            <li>
+                <a href="/news/view?id={{d.id}}">
+                    <h3>{{d.title}}</h3>
+                </a>
+                <p>{{d.update_time}}</p>
+            </li>
+            {% else %}
+            <li>暂无数据</li>
+            {% endfor %}
+        </ul>
+
+        <nav>
+            {% for i in range(1, totalPage+1) -%}
+            <a href="/news?page={{i}}"><button class="pagebtn">{{i}}</button></a>
+            {%- endfor %}
+        </nav>
+
+    </section>
+</body>
+
+</html>
